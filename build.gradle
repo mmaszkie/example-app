@@ -1,6 +1,6 @@
 buildscript {
 	ext.versions = [
-			spring          : '2.7.6'
+			spring          : '3.0.2'
 	]
 }
 
