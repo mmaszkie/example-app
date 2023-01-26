@@ -1,8 +1,14 @@
 buildscript {
+	repositories {
+		mavenCentral()
+	}
 	ext.versions = [
 		spring          : '2.7.5',
-            	kotlin          : '1.6.0'
+            	kotlin          : '1.5.0'
 	]
+	dependencies {
+		classpath group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-reactor', version: '1.6.4'
+	}
 }
 
 plugins {
@@ -14,10 +20,6 @@ plugins {
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
-
-repositories {
-	mavenCentral()
-}
 
 dependencies {
 	implementation "org.springframework.boot:spring-boot-starter-web:${versions.spring}"
