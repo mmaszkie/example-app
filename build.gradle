@@ -21,6 +21,10 @@ group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
+repositories {
+	mavenCentral()
+}
+
 dependencies {
 	implementation "org.springframework.boot:spring-boot-starter-web:${versions.spring}"
     	implementation group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8', version: versions.kotlin
