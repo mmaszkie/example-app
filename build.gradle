@@ -1,6 +1,7 @@
 buildscript {
 	ext.versions = [
-			spring          : '2.7.6'
+			spring          : '2.7.6',
+            kotlin           : '1.8.0'
 	]
 }
 
@@ -20,7 +21,8 @@ repositories {
 
 dependencies {
 	implementation "org.springframework.boot:spring-boot-starter-web:${versions.spring}"
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8', version: versions.kotlin
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
