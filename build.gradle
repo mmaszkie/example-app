@@ -3,9 +3,6 @@ buildscript {
 			spring          : '2.7.6',
             kotlin           : '1.8.0'
 	]
-	repositories {
-		mavenCentral()
-	}
 }
 
 plugins {
