@@ -41,5 +41,5 @@ tasks.named('test') {
 }
 
 wrapper {
-    gradleVersion = '6.9.3'
+    gradleVersion = '7.6'
 }
