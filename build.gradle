@@ -1,11 +1,13 @@
 buildscript {
-    repositories {
-        mavenCentral()
-    }
     ext.versions = [
             spring: '2.7.4',
             kotlin: '1.7.0'
     ]
+
+    repositories {
+        mavenCentral()
+    }
+
     dependencies {
         classpath group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-reactor', version: '1.6.4'
     }
@@ -39,5 +41,5 @@ tasks.named('test') {
 }
 
 wrapper {
-    gradleVersion = '7.5.1'
+    gradleVersion = '6.9.3'
 }
