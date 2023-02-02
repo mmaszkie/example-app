@@ -30,7 +30,7 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: springVersion
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.7.4'
     implementation group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8', version: kotlinVersion
     implementation group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: kotlinVersion
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
