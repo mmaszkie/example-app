@@ -1,9 +1,4 @@
 buildscript {
-    ext.versions = [
-            spring: '2.7.4',
-            kotlin: '1.7.0'
-    ]
-
     repositories {
         mavenCentral()
     }
@@ -21,6 +16,11 @@ plugins {
     id 'org.jetbrains.kotlin.plugin.spring' version '1.7.0'
 }
 
+ext {
+    kotlinVersion = '1.7.0'
+    springVersion = '2.7.4'
+}
+
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
@@ -30,9 +30,9 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: versions.spring
-    implementation group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8', version: versions.kotlin
-    implementation group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: versions.kotlin
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: springVersion
+    implementation group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8', version: kotlinVersion
+    implementation group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: kotlinVersion
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
