@@ -17,9 +17,6 @@ plugins {
     id 'org.jetbrains.kotlin.plugin.spring' version '1.7.0'
 }
 
-def springVersion = '2.7.4'
-def kotlinVersion = '1.7.0'
-
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
