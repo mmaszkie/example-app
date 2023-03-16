@@ -31,7 +31,7 @@ jobs:
         run: sleep 30
 
       - name: Run performance tests
-        run: ./k6 src/main/resources/test.js --out json=results.json
+        run: ./k6 run src/main/resources/test.js --out json=results.json
 
       - name: Upload performance test results
         uses: actions/upload-artifact@v3
