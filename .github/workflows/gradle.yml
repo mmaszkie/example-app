@@ -21,7 +21,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run application
-        run: ./gradlew bootRun --args=--spring.profiles.active=local
+        run: ./gradlew bootRun --args=--spring.profiles.active=local &
 
       - name: Run performance tests
         uses: grafana/k6-action@v0.2.0
