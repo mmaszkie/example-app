@@ -1,6 +1,6 @@
 name: Build and run tests (CI)
 
-on: [push, workflow_dispatch]
+on: [push, workflow_dispatch, pull_request]
 
 jobs:
   build_and_run_tests:
@@ -21,8 +21,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Install k6
-        run: |
-          curl https://github.com/loadimpact/k6/releases/download/v0.26.2/k6-v0.26.2-linux64.tar.gz -L | tar xvz --strip-components 1
+        run: curl https://github.com/grafana/k6/releases/download/v0.43.1/k6-v0.43.1-linux-amd64.tar.gz -L | tar xvz --strip-components 1
 
       - name: Run application
         run: ./gradlew bootRun --args=--spring.profiles.active=local &
@@ -30,11 +29,52 @@ jobs:
       - name: Wait for application to start
         run: sleep 30
 
-      - name: Run performance tests
-        run: ./k6 run src/main/resources/test.js --out json=results.json
+      - name: Check connection
+        run: curl http://localhost:8080/test?assortmentCategory=1
 
-      - name: Upload performance test results
+      - name: Run performance tests
+        id: performanceTests
+        uses: grafana/k6-action@v0.2.0
+        with:
+          filename: src/main/resources/send_get_assortment_visibility.js
+          flags: --out json=results.json
+
+#        run: ./k6 run src/main/resources/send_get_assortment_visibility.js --out json=results.json
+
+      - name: Comment PR when performance tests failed
+        if: failure() && steps.performanceTests.outcome == 'failure'
+        uses: thollander/actions-comment-pull-request@v1
+        with:
+          message: |
+              Performance tests check failed!
+          comment_includes: "Check it"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Comment PR when performance tests failed - add artifacts
+        if: failure() && steps.performanceTests.outcome == 'failure'
+        uses: tonyhallett/artifacts-url-comments@v1.1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          prefix: Here are the artifacts
+          suffix: Have a nice day.
+          format: name
+          addTo: pullandissues
+
+      - name: ls
+        if: success() || failure()
+        run: ls -la
+
+      - name: Upload performance test results 1
+        if: success() || failure()
         uses: actions/upload-artifact@v3
         with:
-          name: summary
-          path: ./summary.html
+          name: k6-summary-report-html
+          path: summary.html
+
+      - name: Upload performance test results 2
+        if: success() || failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: k6-summary-report-json
+          path: results.json
