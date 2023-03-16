@@ -23,10 +23,13 @@ jobs:
       - name: Run application
         run: ./gradlew bootRun --args=--spring.profiles.active=local &
 
+      - name: Wait for application to start
+        run: sleep 30
+
       - name: Run performance tests
         uses: grafana/k6-action@v0.2.0
         with:
-          filename: test.js
+          filename: src/main/resources/test.js
           flags: --out json=results.json
 
       - name: Upload performance test results
