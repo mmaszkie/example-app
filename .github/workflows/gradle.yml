@@ -37,4 +37,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: summary
-          path: summary.html
+          path: ./summary.html
