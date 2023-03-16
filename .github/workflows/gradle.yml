@@ -20,6 +20,18 @@ jobs:
       - name: Allow gradlew execution
         run: chmod +x gradlew
 
+      - name: Install k6
+        run: |
+          curl https://github.com/loadimpact/k6/releases/download/v0.26.2/k6-v0.26.2-linux64.tar.gz -L | tar xvz --strip-components 1
+
+      - name: Install packages
+        run: |
+          npm install
+
+      - name: Build
+        run: |
+          DEPLOYMENT=dev npm run build
+
       - name: Run application
         run: ./gradlew bootRun --args=--spring.profiles.active=local &
 
@@ -27,10 +39,7 @@ jobs:
         run: sleep 30
 
       - name: Run performance tests
-        uses: grafana/k6-action@v0.2.0
-        with:
-          filename: src/main/resources/test.js
-          flags: --out json=results.json
+        run: ./k6 src/main/resources/test.js --out json=results.json
 
       - name: Upload performance test results
         uses: actions/upload-artifact@v3

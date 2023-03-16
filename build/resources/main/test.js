@@ -11,6 +11,6 @@ export const options = {
 };
 
 export default function () {
-  const res = http.get('http://localhost:8080/');
+  const res = http.get('http://localhost:8080/test');
   sleep(1);
 }
