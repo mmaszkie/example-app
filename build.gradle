@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-reactor', version: '1.6.4'
+        classpath group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-reactor', version: '1.7.0'
     }
 }
 
